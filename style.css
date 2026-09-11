@@ -881,6 +881,25 @@ a {
   animation: fadeInRight 1s ease-out;
 }
 
+.tcc-images-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tcc-images-grid .tcc-image-wrapper {
+  height: auto;
+  min-height: 350px;
+}
+
+.tcc-images-grid .tcc-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
 .tcc-image-wrapper {
   position: relative;
   border-radius: 20px;
@@ -996,59 +1015,55 @@ a {
   animation: fadeInLeft 1s ease-out;
 }
 
-.alem-image-wrapper {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(156, 175, 136, 0.15), 0 0 100px rgba(156, 175, 136, 0.08);
-  animation: floatImage 6s ease-in-out infinite;
+.alem-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
 }
 
-.alem-image-wrapper::before {
+.alem-photo-item:first-child {
+  grid-row: 1 / 3;
+}
+
+.alem-photo-item {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(156, 175, 136, 0.12), 0 0 80px rgba(156, 175, 136, 0.06);
+  position: relative;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.alem-photo-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(156, 175, 136, 0.18), 0 0 100px rgba(156, 175, 136, 0.1);
+}
+
+.alem-photo-item::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(156, 175, 136, 0.3) 0%, transparent 50%, rgba(156, 175, 136, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(156, 175, 136, 0.15) 0%, transparent 50%, rgba(156, 175, 136, 0.1) 100%);
   z-index: 1;
   pointer-events: none;
-  transition: all 0.5s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.alem-image-wrapper:hover::before {
-  background: linear-gradient(135deg, rgba(156, 175, 136, 0.15) 0%, transparent 50%, rgba(156, 175, 136, 0.05) 100%);
+.alem-photo-item:hover::before {
+  opacity: 1;
 }
 
-.alem-image-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 40px;
-  background: radial-gradient(ellipse, rgba(156, 175, 136, 0.25) 0%, transparent 70%);
-  filter: blur(15px);
-  z-index: -1;
-}
-
-.alem-image-wrapper img {
+.alem-photo-item img {
   width: 100%;
-  height: auto;
-  min-height: 400px;
-  object-fit: contain;
-  transition: transform 0.6s ease;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
-.alem-image-wrapper:hover img {
+.alem-photo-item:hover img {
   transform: scale(1.05);
-}
-
-.alem-image-accent {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(156, 175, 136, 0.1) 0%, transparent 30%, transparent 70%, rgba(156, 175, 136, 0.15) 100%);
-  pointer-events: none;
-  z-index: 2;
 }
 
 /* ===== A TERAPIA E SOBRE LER A SI MESMO ===== */
@@ -1494,7 +1509,7 @@ a {
 
 .quando-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
@@ -2547,6 +2562,45 @@ a {
   animation: fadeInUp 1s ease-out 0.3s both;
 }
 
+.video-wrapper {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(156, 175, 136, 0.15), 0 0 100px rgba(156, 175, 136, 0.08);
+  position: relative;
+}
+
+.video-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(156, 175, 136, 0.1) 0%, transparent 50%, rgba(156, 175, 136, 0.05) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.consultorio-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: var(--cream-soft);
+  max-height: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .video-wrapper {
+    max-width: 100%;
+  }
+
+  .consultorio-video {
+    max-height: 500px;
+  }
+}
+
 /* ===== FOOTER ===== */
 .footer {
   background: var(--white);
@@ -2862,6 +2916,15 @@ a {
   .alem-image-wrapper img {
     min-height: 300px;
     object-fit: contain;
+  }
+
+  .alem-photos-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .alem-photo-item:first-child {
+    grid-row: auto;
   }
 
   .about-tags {
